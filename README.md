@@ -4,7 +4,7 @@ In this project, you'll label the pixels of a road in images using a Fully Convo
 
 ### Setup
 ##### Frameworks and Packages
-Make sure you have the following is installed:
+Make sure the following are installed:
  - [Python 3](https://www.python.org/)
  - [TensorFlow](https://www.tensorflow.org/)
  - [NumPy](http://www.numpy.org/)
@@ -30,7 +30,7 @@ python main.py
         pool3_out_scaled = tf.multiply(pool3_out, 0.0001, name=‘pool3_out_scaled’)
         pool4_out_scaled = tf.multiply(pool4_out, 0.01, name=‘pool4_out_scaled’)
 
-where pool3_out and pool4_out are the outputs of the VGG-16. You then feed the scaled outputs into your 1x1 convolutions and everything is as before from there.
+    where pool3_out and pool4_out are the outputs of the VGG-16. You then feed the scaled outputs into your 1x1 convolutions and everything is as before from there.
 
 - When adding l2-regularization, setting a regularizer in the arguments of the `tf.layers` is not enough. Regularization loss terms must be manually added to your loss function. otherwise regularization is not implemented. To compute the total loss of the whole network for some batch inputs, manually add the regularization loss as follows:
 
