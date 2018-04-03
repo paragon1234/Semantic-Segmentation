@@ -21,9 +21,18 @@ Run the following command to run the project:
 python main.py
 ```
 
-### Architecture
-- Following the approach in the [Fully Convolutional Networds for Semantic Segmentation](https://arxiv.org/pdf/1605.06211.pdf) paper, the final model consisted of an encoder part using the VGG pretrained model and a decoder part obtained by upsampling and skip layers to output same size as the input image.
+### FCN Architecture
+- Following the approach in the [Fully Convolutional Networds for Semantic Segmentation](https://arxiv.org/pdf/1605.06211.pdf) paper, my network was based on the FCN-8 architecture (right) that was built using the VGG network (left). 
 
+<img src="https://raw.githubusercontent.com/pszczesnowicz/SDC-P12-Semantic-Segmentation/master/images/VGG.jpg" width="400"><img src="https://raw.githubusercontent.com/pszczesnowicz/SDC-P12-Semantic-Segmentation/master/readme_images/fcn.jpg" width="400">
+
+The encoder portion of the network consists of the convolution and pooling layers of the VGG network (pretrained model) with the final two fully connected layers replaced with 1x1 convolutions to prevent the complete loss of spatial information. The decoder portion of the network consists of 1x1 convolution, upsampling, skip layers and summation layers.
+
+<img src="https://raw.githubusercontent.com/pszczesnowicz/SDC-P12-Semantic-Segmentation/master/readme_images/fcn8.jpg" width="800">
+
+The 1x1 convolution layers reduce the encoder's output depth from 4096 to the number of classes that the network is trained to recognize. The upsampling layers increase the encoder's output spatial dimensions from 7x7 to the original input image dimensions. The summation layers add together the upsampling and pooling layers. The pooling layers are from upstream of the encoder output and therefore contain more spatial information which improves the network's inference accuracy.
+
+### Implementation
 - The link for the frozen `VGG16` model is hardcoded into `helper.py`.  The model can be found [here](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/vgg.zip)
 
 - The model is not vanilla `VGG16`, but a fully convolutional version, which already contains the 1x1 convolutions to replace the fully connected layers. 
