@@ -24,7 +24,7 @@ python main.py
 ### FCN Architecture
 - Following the approach in the [Fully Convolutional Networds for Semantic Segmentation](https://arxiv.org/pdf/1605.06211.pdf) paper, my network was based on the FCN-8 architecture (right) that was built using the VGG network (left). 
 
-<img src="https://raw.githubusercontent.com/paragon1234/Semantic-Segmentation/tree/master/images/VGG.jpg" width="400"><img src="https://raw.githubusercontent.com/pszczesnowicz/SDC-P12-Semantic-Segmentation/master/readme_images/fcn.jpg" width="400">
+<img src="./images/VGG.jpg" width="400"><img src="https://raw.githubusercontent.com/pszczesnowicz/SDC-P12-Semantic-Segmentation/master/readme_images/fcn.jpg" width="400">
 
 The encoder portion of the network consists of the convolution and pooling layers of the VGG network (pretrained model) with the final two fully connected layers replaced with 1x1 convolutions to prevent the complete loss of spatial information. The decoder portion of the network consists of 1x1 convolution, upsampling, skip layers and summation layers.
 
