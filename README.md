@@ -52,7 +52,7 @@ The 1x1 convolution layers reduce the encoder's output depth from 4096 to the nu
         reg_constant = 0.01  # Choose an appropriate one.
         loss = my_normal_loss + reg_constant * sum(reg_losses)
         
-- The model was trained with a batch size of 10 and in 10 epochs, using dropout with a keep probability of 0.5. 
+- The model was trained with a batch size of 10 and in 12 epochs, using dropout with a keep probability of 0.5. 
     The network was trained to recognize two classes: road and not road.
     The loss function for the network is cross-entropy, and an Adam optimizer is used.
 
@@ -61,7 +61,7 @@ The following are the final network's parameters and hyperparameters:
 | (Hyper)Parameter                  | Value   |
 | --------------------------------- |--------:|
 | Number of classes                 | 2       |
-| Epochs                            | 10      |
+| Epochs                            | 12      |
 | Batch size                        | 10      |
 | Initialization standard deviation | 1e-2    |
 | Regularization scale              | 1e-3    |
