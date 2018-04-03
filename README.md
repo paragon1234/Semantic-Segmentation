@@ -27,9 +27,11 @@ Following the approach in the [Fully Convolutional Networds for Semantic Segment
 <img src="./images/VGG.jpg" width="400"><img src="./images/fcn.jpg" width="400">
 
 
+
 The encoder portion of the network consists of the convolution and pooling layers of the VGG network (pretrained model) with the final two fully connected layers replaced with 1x1 convolutions to prevent the complete loss of spatial information. The decoder portion of the network consists of 1x1 convolution, upsampling, skip layers and summation layers.
 
 <img src="./images/fcn8.jpg" width="800">
+
 
 
 The 1x1 convolution layers reduce the encoder's output depth from 4096 to the number of classes that the network is trained to recognize. The upsampling layers increase the encoder's output spatial dimensions from 7x7 to the original input image dimensions. The summation layers add together the upsampling and pooling layers. The pooling layers are from upstream of the encoder output and therefore contain more spatial information which improves the network's inference accuracy.
@@ -39,14 +41,14 @@ The 1x1 convolution layers reduce the encoder's output depth from 4096 to the nu
 
 - The model is not vanilla `VGG16`, but a fully convolutional version, which already contains the 1x1 convolutions to replace the fully connected layers. 
 
-- The original FCN-8s was trained in stages. The authors later uploaded a version that was trained all at once to their GitHub repo.  The version in the GitHub repo has one important difference: The outputs of pooling layers 3 and 4 are scaled before they are fed into the 1x1 convolutions.  As a result, some students have found that the model learns much better with the scaling layers included. The model may not converge substantially faster, but may reach a higher IoU and accuracy. To include the scaling layers, simply add them to your model like so:
+- The original FCN-8s was trained in stages. The authors later uploaded a version that was trained all at once to their GitHub repo.  The version in the GitHub repo has one important difference: The outputs of pooling layers 3 and 4 are scaled before they are fed into the 1x1 convolutions.  As a result, the model learns much better with the scaling layers included. The model may not converge substantially faster, but may reach a higher IoU and accuracy. To include the scaling layers, simply add them to your model like so:
 
         pool3_out_scaled = tf.multiply(pool3_out, 0.0001, name=‘pool3_out_scaled’)
         pool4_out_scaled = tf.multiply(pool4_out, 0.01, name=‘pool4_out_scaled’)
 
     where pool3_out and pool4_out are the outputs of the VGG-16. You then feed the scaled outputs into your 1x1 convolutions and everything is as before from there.
 
-- When adding l2-regularization, setting a regularizer in the arguments of the `tf.layers` is not enough. Regularization loss terms must be manually added to your loss function. otherwise regularization is not implemented. To compute the total loss of the whole network for some batch inputs, manually add the regularization loss as follows:
+- When adding l2-regularization, setting a regularizer in the arguments of the `tf.layers` is not enough. Regularization loss terms must be manually added to the loss function, otherwise regularization is not implemented. To compute the total loss of the whole network, manually add the regularization loss as follows:
 
         reg_losses = tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
         reg_constant = 0.01  # Choose an appropriate one.
