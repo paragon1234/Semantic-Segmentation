@@ -68,6 +68,21 @@ The following are the final network's parameters and hyperparameters:
 | Dropout keep probability          | 0.5     |
 | Adam learning rate                | 0.0009  |
 
+### Result
+[//]: # (Image References)
+[image1]: ./images/um_000032.png
+[image2]: ./images/um_000072.png
+[image3]: ./images/umm_000032.png
+[image4]: ./images/umm_000063.png
+[image5]: ./images/uu_000089.png
+
+Some of the results are shown below:
+
+![sample][image1]
+![sample][image2]
+![sample][image3]
+![sample][image4]
+![sample][image5]
 
 **Conclusion:**
 The result from this semantic segmentation project are satisfactory as the model can label most pixels of the road close to the best solution. In case of identifying only the road plane, the results here can be combined with an advanced lane finding pipeline to obtain more accurate road plane segmentation.
